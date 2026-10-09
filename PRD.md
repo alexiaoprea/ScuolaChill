@@ -217,6 +217,155 @@ Apre la dashboard e visualizza il numero di studenti per classe, le materie asse
 - Sessione scaduta, il Direttore rimane inattivo abbastanza a lungo da far scadere la sessione. Quando prova a consultare la dashboard, il sistema richiede l'autenticazione
 - Dati non disponibili temporaneamente, il sistema non riesce a recuperare i dati dal database. Viene mostrato un messaggio di errore e permette al Direttore di riprovare
 
+**DOC-01 · Caricare il materiale didattico**
+
+**User flow**
+
+1. Il Docente accede a ScuolaChill
+2. Apre la sezione "_Materiale didattico_"
+3. Seleziona una delle proprie classi
+4. Seleziona una delle proprie materie
+5. Seleziona "_Aggiungi materiale_"
+6. Inserisce titolo e descrizione
+7. Seleziona un file da caricare
+8. COnferma l'operazione
+9. Il materiale viene caricato
+10. Gli studenti della classe possono visualizzare il materiale caricato
+
+**Scenario principale.**
+
+Il docente Mario Rossi vuole condividere con la classe 1A una presentazione di Inglese\
+Seleziona 1A, sceglie Inglese tra le materie a lui assegnate, inserisce il titolo "English Literature" e nella descrizione scrive a che lezione fa riferimento il file e una breve descrizione di quello che si trova al suo interno.\
+Importa il file e salva. Il materiale viene pubblicatoe gli studenti della classe possono visualizzarlo
+
+**Scenari alternativi.**
+
+- Il caricamento viene interrotto, il materiale non viene pubblicato ma viene salvato in bozza e il docente può riprovare
+- Il file non è valido oppure supera i limiti previsti, il caricamento viene rifiutato
+- Titolo mancante, il docente seleziona un file senza inserire il titolo. Il sistema segnala il campo come obbligatorio e impedisce la pubblicazione finchè non viene inserito
+- Materiale duplicato, il docente tenta di caricare nuovamente lo stesso materiale per la stessa classe e materia. Il sistema segnala che potrebbe trattarsi di un duplicato e permette di decidere se proseguire
+
+**DOC-02 · Creare le proprie verifiche**
+
+**User flow**
+
+1. Il Docente accede a ScuolaChill
+2. Apre la sezione "_Verifiche_"
+3. Seleziona una classe
+4. Seleziona la materia
+5. Seleziona "_Nuova verifica_"
+6. Inserisce titolo, data e l'ora in cui verrà svolta la verifica e il tempo disponibile per la consegna
+7. Inserisce le domande
+8. Controlla i dati inseriti
+9. Salva la verifica
+10. La verifica diventa disponibile per essere svolta nella data e ora selezionata
+
+**Scenario principale.**
+
+Il docente Luigi Bianchi prepara una verifica di Matematica per la 1A.\
+Inserisce il titolo "Equazioni di Primo grado", imposta la data, l'ora e il tempo disponibile per svolgere la verifica e aggiunge le consegne. Dopo aver salvato, il docente vede la verifica tra le "_Verifiche disponibili_"
+
+**Scenari alternativi.**
+
+- Data non valida, il docente inserisce una data di svolgimento precedente alla data corrente. Il sistema segnala l'errore e ne impedisce il salvataggio.
+- Errore di salvataggio, la connessione viene interrota mentre il docente salva la verifica. Il sistema comunica che l'operazione non è stata eseguita correttamente e salva una bozza in modo da non dover riscrivere tutto. Permette poi di riprovare l'operazione
+- Doppio click su salva, il docente preme 2 volte velocemente il tasto "_Salva_". Il sistema impedisce la creazione di 2 verifiche identiche a causa delle richieste duplicate e pubblica solo 1 copia
+
+**DOC-03 · Assegnare voti**
+
+**User flow**
+
+1. Il docente accede a ScuolaChill
+2. Seleziona la classe
+3. Apre la sezione Verifiche
+4. Apre la sezione "_Verifiche svolte_"
+5. Seleziona la verifica
+6. Visualizza gli studenti che hanno svolto e consegnato
+7. Seleziona uno studente
+8. Inserisce il voto
+9. IL voto viene registrato
+10. Una volta inseriti tutti i voti, salva e li pubblica
+11. Il voto può essere visualizzato dallo studente
+
+**Scenario principale.**
+
+Il docente Luigi Bianchi corregge una verifica di Matematica della 1A.\
+Seleziona "_Verifiche_", "_Verifiche svolte_", "_Equazioni di primo grado_". Compare l'elenco di chi ha svolto il compito. Seleziona lo studente Luca Verdi e visiona la verifica con le rispettive risposte. Inserisce il voto "7.5" e conferma. Il sistema registra il voto e Luca Bianchi può successivamente visualizzarlo nella propria sezione dedicata.
+
+**Scenari alternativi.**
+
+- Voto non inserito, il docente tenta di confermare le valutazioni inserite senza aver inserito uno o più voti. Il sistema segnala che uno o più campi obbligatori sono mancanti e impedisce il salvataggio
+- Modifica di un voto già inserito, il docente si accorge di aver inserito un voto errato e prova a modificarlo. Il nuovo voto viene salvato ed è visibile dallo studente
+
+**STUD-01 · Consultare materiale didattico**
+
+**User flow**
+
+1. Lo Studente accede a ScuolaChill
+2. Visualizza le proprie materie
+3. Seleziona una materia
+4. Visualizza l'elenco dei materiali didattici disponibili
+5. Seleziona il materiale
+6. Consulta o scarica il contenuto
+
+**Scenario principale.**
+
+Luca Verdi, studente della 1A, deve ripassare Inglese in vista di una verifica. Accede a ScuolaChill, apre la materia e visualizza i materiali resi disponibili dal docente. Seleziona uno dei materiali, consulta titolo e descrizione per verificare che sia ciò che gli serve e scarica il materiale
+
+**Scenari alternativi.**
+
+- Non sono presenti materiali, il sistema mostra un messaggio che comunica che non ci sono ancora contenuti disponibili
+- Errore durante il download, lo studente prova a scaricare il documento, ma il download viene interrotto. Il sistema segnala il problema e permette di riprovare
+
+**STUD-02 · Svolgere una verifica**
+
+**User flow**
+
+1. Lo Studente accede a ScuolaChill
+2. Apre la sezione "_Verifiche da svolgere_"
+3. Seleziona la materia che gli interessa
+4. Visualizza le verifiche disponibili per materia
+5. Il sistema controlla che la data e l'ora inserita dal docente corrispondano con la data e l'ora corrente
+6. Legge le domande
+7. Inserisce le proprie risposte
+8. Controlla la propria verifica
+9. Seleziona "_Consegna_"
+10. Le risposte vengono registrate
+11. La verifica viene contrassegnata come "_Consegnata_"
+
+**Scenario principale.**
+
+Alle 9:00 di venerdì mattina Luca Bianchi accede a ScuolaChill e trova una verifica di Matematica assegnata alla 1A, la sua classe.\
+Dopo l'ok del docente, seleziona la verifica, legge le consegne e svolge gli esercizi. Una volta ricontrollato tutto, clicca "_Consegna_" entro il tempo limite. Il sistema conferma che le risposte sono state registrate e mostra che la verifica è stata consegnata correttamente
+
+**Scenari alternativi.**
+
+- Connessione cade durante lo svolgimento, le risposte già salvate rimangono registrate e il sistema segnala lo stato della connessione
+- Il tempo della verifica assegnato dal docente è scaduto, il sistema mostra un banner "_Tempo Scaduto_" e ne obbliga la consegna
+- Lo studente apre la verifica in un altra scheda, il sistema impedisce una seconda consegna dopo che la prima è stata registrata
+
+**STUD-03 · Consultare i voti**
+
+**User flow**
+
+1. Lo Studente accede a ScuolaChill
+2. Apre la sezione "_Voti_"
+3. Il sistema recupera i voti associati allo studente
+4. I voti vengono raggrupati per materia
+5. Lo studente eventualmente seleziona una materia
+6. Visualizza il titolo della verifica, la data in cui è stata svolta e il relativo voto
+7. I voti sotto il 5.5 sono visualizzati in rosso, quelli tra il 5.5 e 6- in giallo e i voti tra 6 - 10 in verde
+
+**Scenario principale.**
+
+Luca Bianchi vuole controllare il proprio andamento in Inglese.\
+Apre la sezione voti, seleziona Inglese e visualizza tutti i voti e le relative verifiche. Vede anche la media dei voti di Inglese
+
+**Scenari alternativi.**
+
+- Voto non ancora disponibile, lo studente sa di aver svolto la verifica ma il docente non ha ancora registrato la valutazione. Il sistema mostra solo i voti effettivamente registrati quindi la verifica e il relativo voto verranno disponibili quando il docente gli inserirà.
+- Ordine dei voti, lo studente modifica la visualizzazione dell'ordine dei voti, per esempio vuole vedere i voti più recenti. Il sistema aggiorna la lista e mostra i voti più recenti suddivisi per materia
+
 ---
 
 ## Requisiti funzionali
