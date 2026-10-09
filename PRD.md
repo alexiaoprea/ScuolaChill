@@ -99,32 +99,25 @@ Il sistema è deployato su _Microsoft Azure_
 
 ### La scuola che avete immaginato
 
-_Descrivi la scuola per cui progettate. Che tipo di istituto è, dove si trova, come si organizza la giornata. Questi dati tornano nella stima del carico, quindi scegli numeri che poi userai davvero._
-
-|                    | Valore                                                          |
+ScuolaChill è progettato per un liceo linguistico di piccole-medie dimensioni situato in Nord-Italia.\
+La scuola utilizza ScuolaChill principalmente durante l'orario scolastico ma Docenti e Studenti possono accedervi anche da casa.\
+La giornata scolastica si svolge principalmente dalle 8.00 alle 14.00 dal lunedì al venerdì.\
+Gli utenti accedono al sistema tramite il WI-FI della scuola, la rete mobile o il WI-FI di casa.
+| | Valore |
 | ------------------ | --------------------------------------------------------------- |
-| Numero di studenti | _…_                                                             |
-| Numero di docenti  | _…_                                                             |
-| Numero di classi   | _…_                                                             |
-| Orario scolastico  | _es. 8:00 – 14:00, dal lunedì al venerdì_                       |
-| Connettività       | _es. Wi-Fi scolastico condiviso, rete mobile degli studenti, …_ |
+| Numero di studenti | 150 |
+| Numero di docenti | 30 |
+| Numero di classi | 6 |
+| Orario scolastico | 8:00 – 14:00, dal lunedì al venerdì |
+| Connettività | Wi-Fi scolastico condiviso, rete mobile e WI-FI di casa |
 
 ### Gli archetipi
 
-Arricchisci gli archetipi della traccia.
-
-| ID      | Archetipo | Contesto d'uso | Competenze digitali | Dispositivo principale | Frequenza d'uso |
-| ------- | --------- | -------------- | ------------------- | ---------------------- | --------------- |
-| ARC-001 | Direttore | _…_            | _…_                 | _…_                    | _…_             |
-| ARC-002 | Docente   | _…_            | _…_                 | _…_                    | _…_             |
-| ARC-003 | Studente  | _…_            | _…_                 | _…_                    | _…_             |
-
-<aside>
-💡
-
-I collaudatori veri sono i ragazzi del primo anno. Usano lo smartphone in corridoio o il PC in laboratorio? La risposta cambia l'interfaccia, i requisiti di usabilità e perfino il dimensionamento.
-
-</aside>
+| ID      | Archetipo | Contesto d'uso                                                                                                                                   | Competenze digitali | Dispositivo principale            | Frequenza d'uso |
+| ------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- | --------------------------------- | --------------- |
+| ARC-001 | Direttore | Utilizza ScuolaChill principalmente dal proprio ufficio per gestire utenti, classi e controllare l'andamento dell'istituto                       | Medio-alte          | PC / Laptop                       | Quotidiana      |
+| ARC-002 | Docente   | Utilizza ScuolaChill a scuola e da casa per caricare materiali, creare verifiche e assegnare voti e presenze                                     | Medie / Medio-alte  | Laptop / Tablet                   | Quotidiana      |
+| ARC-003 | Studente  | Utilizza ScuolaChill durante le lezioni, in laboratorio, a casa o in altri momenti della giornata per consultare il proprio andamento scolastico | Medie / Medio-alte  | PC / Laptop / Tablet / Smartphone | Quotidiano      |
 
 ---
 
@@ -132,25 +125,97 @@ I collaudatori veri sono i ragazzi del primo anno. Usano lo smartphone in corrid
 
 ### ScuolaChill in poche righe
 
-_Racconta ScuolaChill come lo spiegheresti al Direttore in un minuto. Niente termini tecnici._
+ScuolaChill è una piattaforma online in cui la scuola può organizzare e gestire le principali attività legate alla didattica.\
+Il _Direttore_ può gestire docenti, studenti e classi; i _Docenti_ possono mettere a disposizione il loro materiale e creare verifiche; gli _Studenti_ possono studiare, svolgere le verifiche e controllare i propri voti\
+
+**I vantaggi principali sono:**
+
+> - Tutto in un unico posto:\
+>   Materiali, verifiche e voti sono facilmente reperibili senza dover utilizzare strumenti diversi;
+> - Maggiore organizzazione :\
+>   Ogni utente vede le informazioni e le attività che gli competono;
+> - Accesso semplice e immediato:\
+>   ScuolaChill può essere usato sia a scuola che a casa
+> - Risparmio di tempo
+>   Direttore e docenti possono gestire le proprie attività in modo più rapido e ordinato
+> - Maggiore autonomia per gli studenti:\
+>   Possono controllare in autonomia materiali, verifiche e valutazioni
 
 ### User flow e scenari
 
-Per ogni ruolo, scegli **almeno tre** storie principali e descrivi il percorso completo.
-
-**Storia:** _es. STU-02 · Svolgere una verifica_
+**DIR-01 · Creare account docente**
 
 **User flow**
 
-1. _Lo studente accede a ScuolaChill_
-2. _Apre la sezione Verifiche_
-3. _…_
+1. Il direttore accede a ScuolaChill
+2. Apre la sezione "_Gestione utenti_"
+3. Seleziona "_Docenti_"
+4. Seleziona "_Nuovo docente_"
+5. Inserisce i dati richiesti (Nome, Cognome, Secondo nome/ cognome, Data di nascita e Materia/e insegnata/e)
+6. COnferma la creazione dell'account
+7. Il sistema verifica che siano stati inseriti tutti i dati e che siano tutti validi(Data di nascita e email soprattuto)
+8. Il sistema crea l'account con ruolo Docente
+9. Il nuovo docente compare nell'elenco degli utenti
 
-**Scenario principale.** _Racconta il caso in cui tutto va bene, con un personaggio e una situazione concreta._
+**Scenario principale.**
 
-**Scenari alternativi.** _Cosa succede quando qualcosa va storto? Connessione che cade, scadenza superata, doppia scheda aperta…_
+Il direttore deve inserire il nuovo docente Mario Rossi.\
+Inserisce nome, cognome, data di nascita, materia insegnata e email.\
+Il sistema verifica che tutti i dati siano stati inseriti correttamente, valida data di nascita (deve essere maggiorenne) e email (non già in uso), poi salva l'account con il ruolo corretto e mostra Mario Rossi nell'elenco utenti
 
-_Ripeti il blocco per le storie principali di Direttore e Docente._
+**Scenari alternativi.**
+
+- Nella scuola c'è un altro docente omonimo del nuovo docente Mario Rossi e quindi la mail sarà uguale per entrambi: "mario.rossi.doc@scuolachill.it".\
+  il sistema segnala che la mail è già assocciata a un altro utente e non crea il nuovo account. Se presente, verrà inserito il secondo nome/ cognome del docente.
+- Uno o più dati non sono validi, il sistema segnala il problema, evidenzia gli errori e ne impedisce il salvataggio
+- Un docente o uno studente tentano di creare un nuovo account utente, il sistema nega l'accesso
+
+**DIR-03 · Creare classi e comporle**
+
+**User flow**
+
+1. Il Direttore accede a ScuolaChill
+2. Apre la sezione "_Classi_"
+3. Seleziona "_Crea nuova classe_"
+4. Inserisce i dati della classe (nome sezione)
+5. Conferma la creazione
+6. Apre la classe appena creata
+7. Seleziona gli studenti da assegnare
+8. Assegna i docenti e le rispettive materie
+9. Salva la composizione della classe
+10. Il sistema aggiorna le informazioni degli utenti coinvolti
+
+**Scenario principale.**
+
+Il direttore crea la classe 1A e vi assegna 24 studenti. Successivamente assegna alla classe un docente di Inglese e un docente di Matematica. Dopo il salvataggio, gli studenti risultano iscritti alla 1A e i docenti assegnati vedono la classe tra quelle di loro competenza.
+
+**Scenari alternativi.**
+
+- Uno studente è assegnato a un'altra classe attiva, il sistema impedisce una seconda assegnazione e propone il trasferimento di sezione
+- Un docente viene assegnato a una materia che non gli è stata associata. Il sistema segnala l'errore e l'operazione viene impedita
+
+**DIR-04 · Vedere tutto**
+
+**User flow**
+
+1. Il direttore accede a ScuolaChill
+2. Apre la dashboard principale
+3. Visualizza il numero di Studenti, Docenti, Classi
+4. Consulta l'elenco delle classi
+5. Consulta i Docenti e le materie assegnate
+6. Visualizza l'andamento generale dei voti
+
+**Scenario principale.**
+
+Il Direttore vuole controllare rapidamente l'andamento dell'istituto prima di una riunione.
+Apre la dashboard e visualizza il numero di studenti per classe, le materie assegnate ai docenti e l'andamento generale dei voti senza dover aprire singolarmente ogni classe
+
+**Scenari alternativi.**
+
+- Nessun dato disponibile, la piattaforma è appena stata configurata e non sono ancora presenti studenti, docenti o voti.
+  Il sistema mostra le sezioni vuote con un messaggio "_Nessun dato inserito_" invece che lasciare la pagina vuota
+- Sessione scaduta, il Direttore rimane inattivo abbastanza a lungo da far scadere la sessione. Quando prova a consultare la dashboard, il sistema richiede l'autenticazione
+- Dati non disponibili temporaneamente, il sistema non riesce a recuperare i dati dal database. Viene mostrato un messaggio di errore e permette al Direttore di riprovare
 
 ---
 
