@@ -38,7 +38,7 @@
 **Dal lato tecnico.**
 
 ScuolaChill è un'applicazione full stack composta da un frontend _React_ e da un backend _REST_ realizzato in _C#_ (con ASP.NET Core)\
-Frontend e Backend comunicano tra loro tramite _HTTPS_ mentre i dati vengono salvati in un Database relazionale _MySQL_
+Frontend e Backend comunicano tra loro tramite _HTTPS_ mentre i dati vengono salvati in un Database relazionale _PostgreSQL_
 Le API principali sono documentate con _OpenAPI/Swagger_ e coperte da una collezione _Postman_ usata come verifica.\
 Il sistema è deployato su _Microsoft Azure_
 
@@ -709,14 +709,14 @@ Ogni requisito ha una soglia, una condizione e un modo per verificarlo. Ed è co
 
 ### Requisiti impliciti
 
-Prima di chiudere questa sezione, intervista per dieci minuti un ragazzo del primo anno. La domanda è una sola. _"Cosa daresti per scontato che un'app di questo tipo faccia sempre, o non faccia mai?"_
+La domanda è una sola. _"Cosa daresti per scontato che un'app di questo tipo faccia sempre, o non faccia mai?"_
 
 | Chi avete intervistato | Cosa ha detto                                                                     | Requisito che ne avete ricavato |
 | ---------------------- | --------------------------------------------------------------------------------- | ------------------------------- |
-| _nome o iniziali_      | Non voglio che gli altri studenti possano vedere i miei voti                      | NFR-16                          |
-| _nome o iniziali_      | Se sbaglio a inserire una risposta, voglio poterla correggere prima di consegnare | NFR-17                          |
-|                        | Voglio sapere se il materiale che sto caricando è stato salvato davvero.          | NFR-18                          |
-|                        | Se dimentico la password, voglio poter recuperare l'accesso.                      | NFR-19                          |
+| L. V.                  | Non voglio che gli altri studenti possano vedere i miei voti                      | NFR-16                          |
+| M. R.                  | Se sbaglio a inserire una risposta, voglio poterla correggere prima di consegnare | NFR-17                          |
+| P. G.                  | Voglio sapere se il materiale che sto caricando è stato salvato davvero.          | NFR-18                          |
+| B. N.                  | Se dimentico la password, voglio poter recuperare l'accesso.                      | NFR-19                          |
 
 ---
 
@@ -726,77 +726,77 @@ Prima di chiudere questa sezione, intervista per dieci minuti un ragazzo del pri
 
 Quello che date per vero senza poterlo garantire.
 
-| ID     | Assunzione                                   | Cosa succede se è falsa         |
-| ------ | -------------------------------------------- | ------------------------------- |
-| ASS-01 | _es. La scuola ha 800 studenti e 60 docenti_ | _Il dimensionamento va rifatto_ |
-|        |                                              |                                 |
+| ID     | Assunzione                                                                                                                   | Cosa succede se è falsa                                                                        |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| ASS-01 | Il liceo linguistico dispone di circa 150 studenti, 30 docenti e 6 classi.                                                   | Sarà necessario rivedere le stime del carico e il dimensionamento dell'infrastruttura.         |
+| ASS-02 | Ogni studente appartiene a una sola classe attiva alla volta.                                                                | Sarà necessario modificare il modello dei dati e le regole di assegnazione degli studenti.     |
+| ASS-03 | Gli utenti accedono prevalentemente a ScuolaChill durante l'orario scolastico, dalle 8:00 alle 14:00, dal lunedì al venerdì. | Il profilo di carico dovrà essere aggiornato in base ai nuovi orari di utilizzo.               |
+| ASS-04 | Gli utenti dispongono di un dispositivo con un browser moderno e di una connessione Internet.                                | Sarà necessario valutare il supporto a dispositivi o condizioni di rete differenti.            |
+| ASS-05 | I materiali didattici sono principalmente documenti, presentazioni e immagini di dimensioni contenute.                       | Potrebbero essere necessari limiti di upload differenti e un maggiore spazio di archiviazione. |
+| ASS-06 | Il Direttore è responsabile della correttezza dei dati relativi a utenti, classi e assegnazioni.                             | Sarà necessario definire ulteriori procedure per controllare e correggere i dati inseriti.     |
+| ASS-07 | Il servizio email esterno consente l'invio di messaggi di attivazione degli account.                                         | Sarà necessario scegliere un altro provider o adottare un diverso processo di attivazione.     |
+| ASS-08 | Gli studenti possono utilizzare ScuolaChill sia a scuola sia da casa con le stesse credenziali.                              | Sarà necessario valutare eventuali requisiti aggiuntivi di autenticazione e accesso.           |
 
 ### Vincoli
 
 I limiti che non potete cambiare.
 
-| ID     | Vincolo                                             | Da dove viene          |
-| ------ | --------------------------------------------------- | ---------------------- |
-| VIN-01 | _es. Il budget cloud è quello dei crediti studente_ | _Traccia del progetto_ |
-|        |                                                     |                        |
+| ID     | Vincolo                                                                                                                  | Da dove viene               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| VIN-01 | Il budget cloud è quello dei crediti studente.                                                                           | Traccia del progetto        |
+| VIN-02 | ScuolaChill deve essere un'applicazione full stack con frontend e backend.                                               | Traccia del progetto        |
+| VIN-03 | Il frontend deve essere sviluppato utilizzando React.                                                                    | Scelta tecnologica del team |
+| VIN-04 | Il backend deve essere realizzato in C# con ASP.NET Core ed esporre API REST.                                            | Scelta tecnologica del team |
+| VIN-05 | Il sistema deve supportare i tre ruoli previsti: Direttore, Docente e Studente.                                          | Traccia del progetto        |
+| VIN-06 | Devono esistere almeno gli ambienti Development e Production e i segreti non devono essere inseriti nel codice sorgente. | Traccia del progetto        |
+| VIN-07 | L'applicazione deve essere distribuita su un'infrastruttura cloud reale e raggiungibile pubblicamente per il collaudo.   | Traccia del progetto        |
 
 ### Dipendenze
 
 Le cose esterne senza cui non potete andare avanti.
 
-| ID     | Dipendenza                              | Serve entro          | Chi se ne occupa |
-| ------ | --------------------------------------- | -------------------- | ---------------- |
-| DIP-01 | _es. Account attivo sul servizio email_ | _Prima del collaudo_ | _nome_           |
-|        |                                         |                      |                  |
+| ID     | Dipendenza                                                  | Serve entro                                                               | Chi se ne occupa |
+| ------ | ----------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------- |
+| DIP-01 | Account attivo sul servizio email                           | Prima dei test di creazione e attivazione degli account                   | Alexia Oprea     |
+| DIP-02 | Account Microsoft Azure e disponibilità dei servizi scelti. | Prima del deployment                                                      | Alexia Oprea     |
+| DIP-03 | Configurazione del dominio e del servizio email             | Prima dell'invio reale delle email                                        | Alexia Oprea     |
+| DIP-04 | Collezione Postman con le richieste e i test delle API.     | Durante lo sviluppo e prima del collaudo finale                           | Alexia Oprea     |
+| DIP-05 | Servizio di archiviazione cloud per i materiali didattici   | Prima dei test di caricamento e consultazione dei materiali in Production | Alexia Oprea     |
 
 ---
 
 # Seconda parte · Il come
 
-<aside>
-💡
-
-Da qui in poi parli al tuo docente e al tuo team, non al Direttore. Ogni scelta tecnica va motivata e confrontata con almeno un'alternativa. "Lo conosciamo" è una motivazione valida, ma non può essere l'unica.
-
-</aside>
-
 ## Stima del carico
 
 ### Utenti concorrenti
 
-| Situazione                      | Utenti concorrenti | Da dove viene il numero |
-| ------------------------------- | ------------------ | ----------------------- |
-| Uso normale durante la giornata | _…_                | _…_                     |
-| Picco delle 9:00 (verifiche)    | _…_                | _…_                     |
-| Fine quadrimestre (voti)        | _…_                | _…_                     |
+| Situazione                      | Utenti concorrenti | Da dove viene il numero                                                                                                                                                             |
+| ------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Uso normale durante la giornata | 15 - 25            | Si ipotizza che una parte degli studenti consulti i materiali didattici e i propri voti, mentre alcuni docenti caricano materiali o gestiscono le verifiche.                        |
+| Picco delle 9:00 (verifiche)    | 80 - 90            | Si ipotizza che tre classi, per un totale di circa 75 studenti, inizino contemporaneamente una verifica, mentre alcuni docenti e altri studenti continuano a utilizzare il sistema. |
+| Fine quadrimestre (voti)        | 25 - 40            | Si ipotizza un aumento degli accessi dei docenti che registrano le valutazioni e degli studenti che consultano i propri risultati.                                                  |
 
 ### Profilo di carico
 
-| Operazione              | Frequente? | Pesante? | Critica? | Note |
-| ----------------------- | ---------- | -------- | -------- | ---- |
-| Login                   | _…_        | _…_      | _…_      | _…_  |
-| Apertura verifica       | _…_        | _…_      | _…_      | _…_  |
-| Consegna verifica       | _…_        | _…_      | _…_      | _…_  |
-| Dashboard del Direttore | _…_        | _…_      | _…_      | _…_  |
-| Caricamento materiale   | _…_        | _…_      | _…_      | _…_  |
-
-<aside>
-💡
-
-I numeri di qui devono essere coerenti con la scuola che avete immaginato e con i requisiti non funzionali. Se dichiarate 800 studenti, non potete dimensionare per 20 utenti senza spiegare perché.
-
-</aside>
+| Operazione              | Frequenza   | Pesantezza   | Criticità  | Note                                                                                                                                      |
+| ----------------------- | ----------- | ------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Login                   | Alta        | Bassa        | Alta       | Molti utenti possono accedere all'inizio delle lezioni. Il sistema deve autenticare correttamente l'utente e applicare il ruolo previsto. |
+| Apertura verifica       | Media       | Media        | Alta       | All'inizio di una verifica più classi possono richiedere contemporaneamente le domande. È necessario evitare tempi di risposta elevati.   |
+| Consegna verifica       | Media       | Media        | Molto alta | Le consegne possono concentrarsi nello stesso intervallo di tempo. Il sistema deve registrarle correttamente e impedire invii duplicati.  |
+| Dashboard del Direttore | Bassa       | Media - alta | Media      | La vista complessiva combina informazioni su classi, studenti, docenti e voti. Le query devono rimanere efficienti.                       |
+| Caricamento materiale   | Bassa–media | Alta         | Media      | L'operazione può richiedere più risorse in funzione della dimensione del file e della velocità della connessione.                         |
 
 ---
 
 ## Scelte tecnologiche
 
-| Area             | Scelta | Alternativa considerata | Perché avete scelto così |
-| ---------------- | ------ | ----------------------- | ------------------------ |
-| Backend          | _…_    | _…_                     | _…_                      |
-| Frontend         | _…_    | _…_                     | _…_                      |
-| Database         | _…_    | _…_                     | _…_                      |
-| Provider cloud   | _…_    | _…_                     | _…_                      |
-| Servizi cloud    | _…_    | _…_                     | _…_                      |
-| Regione          | _…_    | _…_                     | _…_                      |
-| Servizio esterno | _…_    | _…_                     | _…_                      |
+| Area             | Scelta                                                                                                                                                                                                                                   | Alternativa considerata                                                                                                  | Perché avete scelto così                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Backend          | C# con ASP.NET Core                                                                                                                                                                                                                      | Java con Spring Boot                                                                                                     | Ho scelto C# perché ho avuto modo di utilizzarlo durante il tirocinio in azienda e quindi ho già acquisito una maggiore familiarità con questo linguaggio rispetto a Java. Inoltre, l'ho trovato più intuitivo da utilizzare. Questa scelta mi permette di partire da competenze già acquisite e concentrarmi maggiormente sulla progettazione e sullo sviluppo del backend.                                                                                                                                                           |
+| Frontend         | React                                                                                                                                                                                                                                    | Angular                                                                                                                  | Ho scelto React perché lo stiamo studiando in un altro modulo del corso. Utilizzarlo in un progetto concreto mi permetterà di approfondirne la conoscenza e applicare quanto appreso in un contesto reale, collegando così le competenze sviluppate in due moduli differenti.                                                                                                                                                                                                                                                          |
+| Database         | PostgreSQL                                                                                                                                                                                                                               | MySQL                                                                                                                    | Ho scelto PostgreSQL perché è il database che studieremo successivamente con il docente del corso. Utilizzarlo per ScuolaChill mi permetterà di mettere in pratica le conoscenze acquisite durante le lezioni e approfondirne l'utilizzo attraverso un progetto concreto.                                                                                                                                                                                                                                                              |
+| Provider cloud   | Microsoft Azure                                                                                                                                                                                                                          | Amazon Web Services (AWS)                                                                                                | Ho scelto Azure perché ho già avuto modo di utilizzarlo durante il tirocinio in azienda e, di conseguenza, ho maggiore familiarità con questa piattaforma rispetto ad altre. Tuttavia, non ho ancora avuto occasione di utilizzare tutti i servizi cloud individuati per ScuolaChill. Questo progetto rappresenta quindi un'opportunità per approfondire le mie conoscenze e comprendere meglio le funzionalità e le possibilità offerte da Azure.                                                                                     |
+| Servizi cloud    | Azure Static Web Apps per il frontend React, Azure App Service per il backend ASP.NET Core, Azure Database for PostgreSQL Flexible Server per il database, Azure Blob Storage per i materiali didattici e Azure Key Vault per i segreti. | Utilizzo di macchine virtuali Azure per ospitare frontend, backend e database, gestendo direttamente i relativi software | Abbiamo scelto i servizi gestiti di Azure perché permettono di pubblicare e gestire frontend, backend e database in modo più semplice, senza dover amministrare direttamente i server. Inoltre, Azure è una piattaforma che conosco già, avendola utilizzata durante il mio periodo di tirocinio.                                                                                                                                                                                                                                      |
+| Regione          | Azure Italy North (Milano)                                                                                                                                                                                                               | Azure West Europe                                                                                                        | Italy North è geograficamente vicina agli utenti previsti e consente di ospitare i servizi principali in Italia, riducendo potenzialmente la latenza di rete. West Europe rimane un'alternativa da valutare in base a disponibilità dei servizi e costi.                                                                                                                                                                                                                                                                               |
+| Servizio esterno | Resend                                                                                                                                                                                                                                   | Brevo oppure SendGrid per l'invio di email                                                                               | Ho scelto Resend perché, durante la ricerca, l'ho trovato tra i servizi di invio email utilizzati dagli sviluppatori e ho ritenuto interessante il suo piano gratuito, che offre diverse funzionalità utili per il progetto. Attualmente il piano gratuito prevede fino a 3.000 email al mese, con un limite di 100 email al giorno, e supporta fino a 3 domini. Questo piano dovrebbe essere adeguato per sperimentare l'invio delle email di attivazione degli account di ScuolaChill senza sostenere inizialmente costi aggiuntivi. |
